@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⛧ غرفة المحادثة - WORM CHAT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- الشريط الجانبي -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>⛧ WORM CHAT</h2>
+                <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+            </div>
+            <div class="rooms-list" id="roomsList">
+                <div class="room active" data-room="general">
+                    <span class="room-icon">💬</span>
+                    <span>العامة</span>
+                    <span class="online-count">0</span>
+                </div>
+                <div class="room" data-room="tech">
+                    <span class="room-icon">💻</span>
+                    <span>تقنية</span>
+                    <span class="online-count">0</span>
+                </div>
+                <div class="room" data-room="gaming">
+                    <span class="room-icon">🎮</span>
+                    <span>ألعاب</span>
+                    <span class="online-count">0</span>
+                </div>
+                <div class="room" data-room="random">
+                    <span class="room-icon">🎲</span>
+                    <span>فضفضة</span>
+                    <span class="online-count">0</span>
+                </div>
+            </div>
+            <button class="new-room-btn" onclick="createRoom()">+ غرفة جديدة</button>
+        </aside>
+
+        <!-- منطقة المحادثة الرئيسية -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <div class="room-info">
+                    <h3 id="currentRoomName">💬 العامة</h3>
+                    <span class="typing-indicator" id="typingIndicator"></span>
+                </div>
+                <div class="header-actions">
+                    <span class="online-badge" id="onlineBadge">
+                        <span class="dot"></span>
+                        <span id="onlineUsers">0 متصل</span>
+                    </span>
+                </div>
+            </header>
+
+            <div class="messages-container" id="messagesContainer">
+                <div class="welcome-message">
+                    <div class="welcome-icon">⛧</div>
+                    <h4>أهلاً بك في WORM CHAT</h4>
+                    <p>اختر غرفة وابدأ المحادثة</p>
+                </div>
+            </div>
+
+            <div class="message-input-area">
+                <div class="input-container">
+                    <button class="emoji-btn" onclick="toggleEmojiPicker()">😊</button>
+                    <input 
+                        type="text" 
+                        id="messageInput" 
+                        placeholder="اكتب رسالتك هنا..." 
+                        autocomplete="off"
+                        onkeypress="handleKeyPress(event)"
+                        oninput="handleTyping()"
+                    >
+                    <button class="send-btn" onclick="sendMessage()">
+                        <span>إرسال</span>
+                        <span class="send-icon">📨</span>
+                    </button>
+                </div>
+                <div class="emoji-picker" id="emojiPicker" style="display:none;">
+                    <!-- ستملأ بالجافاسكريبت -->
+                </div>
+            </div>
+        </main>
+
+        <!-- لوحة المستخدمين -->
+        <aside class="users-panel" id="usersPanel">
+            <div class="panel-header">
+                <h3>المتصلون</h3>
+            </div>
+            <div class="users-list" id="usersList"></div>
+        </aside>
+    </div>
+
+    <!-- مودال تسجيل الدخول -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <h2>⛧ انضم إلى المحادثة</h2>
+            <div class="avatar-selection" id="avatarSelection"></div>
+            <input type="text" id="usernameInput" placeholder="اسمك المستعار" maxlength="20">
+            <input type="text" id="aliasInput" placeholder="اللقب (اختياري)" maxlength="15">
+            <select id="rankSelect">
+                <option value="">اختر رتبتك</option>
+                <option value=" مبتدئ"> مبتدئ</option>
+                <option value=" محترف"> محترف</option>
+                <option value=" خبير">خبير</option>
+                <option value=" أسطورة"> أسطورة</option>
+                <option value=" متمرد"> متمرد</option>
+            </select>
+            <button onclick="login()">دخول ⛧</button>
+        </div>
+    </div>
+
+    <script src="database.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
